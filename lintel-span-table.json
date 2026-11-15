@@ -1,0 +1,61 @@
+{
+ "code": "Ontario Building Code, Sentence 9.23.12.3.(1) lintel tables (Table A-15 series; renumbered 9.23.12.3.-A to -D in the 2024 Code)",
+ "scope_of_this_tool": "SPF No. 1 or No. 2, non-structural sheathing, 2-ply lintels, supporting ROOF AND CEILING ONLY (supported joist/rafter span not more than 4.9 m). This is the subset that could be verified from readable public sources.",
+ "not_included": "3-ply lintels, roof + ceiling + storeys conditions, limited-attic-storage conditions and structural-sheathing variants exist in the Code tables but could not be verified from a readable public source; they are deliberately excluded rather than guessed.",
+ "applicability_9_23_12_3_1": [
+  "Buildings of residential occupancy only.",
+  "Wall studs exceed 38 x 64 mm. (In loadbearing walls framed with 38 x 64 mm members, lintels shall be not less than 50 mm deeper than the tabled size and not more than 2.24 m long.)",
+  "Spans of supported joists do not exceed 4.9 m; spans of supported trusses do not exceed 9.8 m."
+ ],
+ "columns": [
+  "exterior wall, specified snow load 1.0 kPa",
+  "1.5 kPa",
+  "2.0 kPa",
+  "2.5 kPa",
+  "3.0 kPa",
+  "interior wall"
+ ],
+ "max_span_m": {
+  "2-38x89": [
+   1.27,
+   1.11,
+   1.01,
+   0.93,
+   0.87,
+   0.93
+  ],
+  "2-38x140": [
+   1.93,
+   1.66,
+   1.48,
+   1.35,
+   1.25,
+   1.35
+  ],
+  "2-38x184": [
+   2.35,
+   2.02,
+   1.8,
+   1.64,
+   1.52,
+   1.64
+  ],
+  "2-38x235": [
+   2.88,
+   2.47,
+   2.2,
+   2.01,
+   1.84,
+   2.01
+  ],
+  "2-38x286": [
+   3.34,
+   2.87,
+   2.56,
+   2.33,
+   2.09,
+   2.33
+  ]
+ },
+ "provenance": "Subset read from the Table A-15 excerpt reproduced in the CSA Z240.2.1 technical requirements paper and cross-checked against the City of Niagara Falls accessory-structures guide citing the same OBC table (2-38x89 at SSL 2.0 = 1.01 m; 2-38x286 exterior 2.56 m / interior 2.33 m \u2014 both match), and a 2024 Ontario permit lintel schedule of the same magnitude."
+}
