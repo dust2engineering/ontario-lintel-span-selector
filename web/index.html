@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ontario Lintel Span Selector | Dust 2 Engineering Inc.</title>
+<style>
+:root{color-scheme:dark}
+body{background:#0e1116;color:#e6e9ee;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;padding:24px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto}
+h1{font-size:1.55rem;line-height:1.25;margin:.2em 0 .1em}
+h2{font-size:1.15rem;margin-top:1.6em;color:#ffd479}
+.sub{color:#9fb0c3;margin:.2em 0 1.2em}
+.card{background:#161b22;border:1px solid #2b333f;border-radius:12px;padding:18px;margin:14px 0}
+label{display:block;margin:.7em 0 .25em;color:#c8d3e0;font-size:.95rem}
+input,select,textarea{width:100%;box-sizing:border-box;background:#0e1116;color:#e6e9ee;border:1px solid #39424f;border-radius:8px;padding:9px;font-size:1rem}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.row{grid-template-columns:1fr}}
+button{background:#f0a832;color:#14100a;border:0;border-radius:8px;padding:11px 18px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:14px}
+pre{background:#0a0d11;border:1px solid #2b333f;border-radius:10px;padding:14px;white-space:pre-wrap;word-break:break-word;font-size:.92rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{border:1px solid #2b333f;padding:6px 8px;text-align:left}
+th{background:#1b212b}
+.small{color:#9fb0c3;font-size:.88rem}
+a{color:#7cc4ff}
+.pass{color:#7ee2a0}.fail{color:#ff9c9c}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Ontario Lintel Span Selector</h1>
+<p class="sub">OBC 9.23.12.3 — 2-ply SPF lintels, roof + ceiling only. Verified subset, scope stated on the page.</p>
+<div class="card">
+<label>Lintel size (2-ply, SPF No. 1 / No. 2)</label>
+<select id="sz"><option>2-38x89</option><option>2-38x140</option><option selected>2-38x184</option><option>2-38x235</option><option>2-38x286</option></select>
+<label>Wall and snow load</label>
+<select id="col"><option value="0">Exterior — snow 1.0 kPa</option><option value="1">Exterior — snow 1.5 kPa</option><option value="2" selected>Exterior — snow 2.0 kPa</option><option value="3">Exterior — snow 2.5 kPa</option><option value="4">Exterior — snow 3.0 kPa</option><option value="5">Interior wall</option></select>
+<button onclick="calc()">Maximum span</button>
+<pre id="out">Pick a lintel and click Maximum span.</pre></div>
+<div class="card"><h2>Find a size instead</h2>
+<label>Opening you need to span (m)</label><input id="need" type="number" value="2.2" step="0.1">
+<button onclick="find()">Smallest lintel that works</button>
+<pre id="out2">Uses the wall/snow selection above.</pre></div>
+<div class="card"><h2>Scope — read this before using the numbers</h2>
+<p class="small">This selector covers ONE verified slice of the 9.23.12.3 tables: SPF No. 1/No. 2, non-structural sheathing, 2-ply lintels supporting roof and ceiling only, in residential buildings where supported joist spans are ≤ 4.9 m and truss spans ≤ 9.8 m. The Code's 3-ply, roof-plus-storeys and structural-sheathing tables could not be verified from a readable public source, so they are not here — a tool that guesses lintel spans is worse than a smaller tool that doesn't. In 38 × 64 loadbearing walls, lintels must be at least 50 mm deeper than the tabled size and no longer than 2.24 m.</p></div>
+<p class="small">Free tool by <b>Dust 2 Engineering Inc.</b>, Mississauga, Ontario — building permit
+drawings for restaurants and small commercial projects across the GTA, stamped by an Ontario P.Eng.
+Flat rate $3,500–$5,000. Questions or a project to discuss: open an issue in this repository.</p>
+</div>
+<script>
+const T={"2-38x89": [1.27, 1.11, 1.01, 0.93, 0.87, 0.93], "2-38x140": [1.93, 1.66, 1.48, 1.35, 1.25, 1.35], "2-38x184": [2.35, 2.02, 1.8, 1.64, 1.52, 1.64], "2-38x235": [2.88, 2.47, 2.2, 2.01, 1.84, 2.01], "2-38x286": [3.34, 2.87, 2.56, 2.33, 2.09, 2.33]};
+function calc(){
+ const sz=document.getElementById('sz').value, col=parseInt(document.getElementById('col').value);
+ document.getElementById('out').textContent='Maximum span: '+T[sz][col]+' m (SPF No.1/No.2, 2-ply, roof + ceiling only)';
+}
+function find(){
+ const col=parseInt(document.getElementById('col').value), need=parseFloat(document.getElementById('need').value);
+ const sizes=['2-38x89','2-38x140','2-38x184','2-38x235','2-38x286'];
+ const ok=sizes.filter(s=>T[s][col]>=need);
+ document.getElementById('out2').textContent= ok.length? ('Smallest lintel that works: '+ok[0]+' — max span '+T[ok[0]][col]+' m') : 'No 2-ply SPF lintel in this verified table spans '+need+' m at this snow load.';
+}
+</script>
+</body>
+</html>
