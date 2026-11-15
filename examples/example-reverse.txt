@@ -1,0 +1,5 @@
+A 2.2 m opening at snow load 1.5 kPa:
+
+$ python3 lintel_spans.py --snow 1.5 --need-span 2.2
+
+Smallest 2-ply SPF lintel spanning 2.2 m (exterior wall, specified snow load 1.5 kPa): 2-38x235 - max span 2.47 m
