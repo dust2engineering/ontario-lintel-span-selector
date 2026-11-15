@@ -1,0 +1,5 @@
+2-38x184 lintel, exterior wall, specified snow load 2.0 kPa:
+
+$ python3 lintel_spans.py --size 2-38x184 --snow 2.0
+
+2-38x184, exterior wall, specified snow load 2.0 kPa: maximum span 1.8 m (SPF No.1/No.2, non-structural sheathing, roof + ceiling only)
